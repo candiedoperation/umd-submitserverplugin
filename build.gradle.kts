@@ -11,6 +11,11 @@ repositories {
     mavenCentral()
 }
 
+dependencies {
+    // https://mvnrepository.com/artifact/org.apache.httpcomponents/httpclient
+    implementation("org.apache.httpcomponents:httpclient:4.5.14")
+}
+
 // Configure Gradle IntelliJ Plugin
 // Read more: https://plugins.jetbrains.com/docs/intellij/tools-gradle-intellij-plugin.html
 intellij {
