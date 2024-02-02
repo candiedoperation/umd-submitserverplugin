@@ -2,17 +2,23 @@ package org.atheesh.umdsubmitserverplugin;
 
 import com.intellij.openapi.progress.ProgressIndicator;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.ui.Messages;
+import net.lingala.zip4j.ZipFile;
+import net.lingala.zip4j.model.ZipParameters;
+import net.lingala.zip4j.model.enums.CompressionMethod;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
-import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.ContentType;
+import org.apache.http.entity.mime.MultipartEntityBuilder;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 
 import javax.swing.*;
+import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -21,7 +27,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicReference;
 
 public class SubmitServerMiddleware {
     private Project project;
@@ -42,11 +47,86 @@ public class SubmitServerMiddleware {
 
     public void initiateSubmission() throws SubmitProjectException {
         /* Update Progress */
-        this.progressIndicator.setText("Authenticating with submit server");
+        this.progressIndicator.setText("Authenticating with the submit server");
 
         /* Check Authentication Method in Config */
         if (this.config.get("authentication.type").equals("ldap"))
             negotiateCredentialsLDAP();
+        else
+            throw new SubmitProjectException("Authentication Type not Supported");
+
+        /* Update Progress */
+        this.progressIndicator.setText("Archiving and uploading files to the submit server");
+
+        /* Auth Successful, Archive Project Files */
+        try {
+            /* Define Archive File */
+            File dst = new File(this.project.getBasePath() + "/submit.zip");
+            ZipFile archiveFile = new ZipFile(dst);
+
+            /* Disable Compression */
+            ZipParameters zipParameters = new ZipParameters();
+            zipParameters.setCompressionMethod(CompressionMethod.STORE);
+
+            /* Add folder to Archive */
+            archiveFile.addFolder(
+                new File(this.project.getBasePath() + "/src"),
+                zipParameters
+            );
+
+            /* Add Comment to Archive */
+            archiveFile.setComment("ZipFile for submission: candiedoperation/umd-submitserverplugin");
+
+            /* We're successful with archiving, Upload the file */
+            HttpPost request = new HttpPost(this.config.get("submitURL"));
+            MultipartEntityBuilder mpeBuilder = MultipartEntityBuilder.create();
+
+            /* Add the ZIP file as a binary entity */
+            mpeBuilder.addBinaryBody(
+                    "submittedFiles",
+                    dst,
+                    ContentType.APPLICATION_OCTET_STREAM,
+                    "submit.zip"
+            );
+
+            /* Add Config Parameters */
+            for (String configKey : this.config.keySet()) {
+                String configVal = this.config.get(configKey);
+                if (!configVal.equals("submitURL") && !configVal.equals("password"))
+                    mpeBuilder.addTextBody(configKey, configVal);
+            }
+
+            /* Build and Execute Query */
+            request.setEntity(mpeBuilder.build());
+            CloseableHttpResponse response = httpClient.execute(request);
+            String responseString = EntityUtils.toString(response.getEntity());
+
+            /* Set a short Delay */
+            Thread.sleep(250);
+
+            /* Parse Response String */
+            if (!responseString.startsWith("Successful"))
+                throw new SubmitProjectException("Project Upload Failed: " + responseString);
+
+            /* Show Successful Upload Dialog */
+            SwingUtilities.invokeLater(() -> {
+                Messages.showMessageDialog(
+                        this.project,
+                        responseString,
+                        "Project Successfully Submitted",
+                        Messages.getInformationIcon()
+                );
+            });
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+            throw new SubmitProjectException("Failed to Archive project files");
+        } finally {
+            try {
+                Files.deleteIfExists(Path.of(this.project.getBasePath() + "/submit.zip"));
+            } catch (Exception ex) {
+                System.err.println("Failed to Clean generated Archive.");
+            }
+        }
     }
 
     private void negotiateCredentialsLDAP() throws SubmitProjectException {
@@ -86,7 +166,7 @@ public class SubmitServerMiddleware {
             List<String> rsConfig = Arrays.asList(responseString.split("\n"));
             parseSubmitServerConfig(rsConfig);
 
-            Thread.sleep(500);
+            Thread.sleep(250);
         } catch (Exception ex) {
             throw new SubmitProjectException("Authentication with Server Failed: " + ex.getMessage());
         }
@@ -106,6 +186,10 @@ public class SubmitServerMiddleware {
 
             /* Call Wrapper Method */
             parseSubmitServerConfig(submitServerConfig);
+
+            /* Spoof Course Project Manager Version */
+            this.config.put("submitClientVersion", "0.3.1");
+            this.config.put("submitClientTool", "EclipsePlugin");
         } catch (IOException ex) {
             throw new SubmitProjectException("Unable to access the Submit Server configuration for this project.");
         }

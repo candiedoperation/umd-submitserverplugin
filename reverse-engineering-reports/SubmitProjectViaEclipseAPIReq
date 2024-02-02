@@ -1,0 +1,96 @@
+POST /spring2024/eclipse/SubmitProjectViaEclipse HTTP/1.1
+User-Agent: Jakarta Commons-HttpClient/2.0.1
+Host: submit.cs.umd.edu
+Content-Length: 26039
+Content-Type: multipart/form-data; boundary=----------------314159265358979323846
+
+------------------314159265358979323846
+Content-Disposition: form-data; name="submitClientVersion"
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 8bit
+
+0.3.1
+------------------314159265358979323846
+Content-Disposition: form-data; name="cvstagTimestamp"
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 8bit
+
+t1706897226159
+------------------314159265358979323846
+Content-Disposition: form-data; name="classAccount"
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 8bit
+
+${LDAP_USERNAME_REDACTED}
+------------------314159265358979323846
+Content-Disposition: form-data; name="projectNumber"
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 8bit
+
+Project 1
+------------------314159265358979323846
+Content-Disposition: form-data; name="cvsAccount"
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 8bit
+
+${LDAP_USERNAME_REDACTED}
+------------------314159265358979323846
+Content-Disposition: form-data; name="authentication.type"
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 8bit
+
+ldap
+------------------314159265358979323846
+Content-Disposition: form-data; name="oneTimePassword"
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 8bit
+
+a43ff151b78bc1b8
+------------------314159265358979323846
+Content-Disposition: form-data; name="baseURL"
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 8bit
+
+https://submit.cs.umd.edu:443/spring2024
+------------------314159265358979323846
+Content-Disposition: form-data; name="courseName"
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 8bit
+
+CMSC132
+------------------314159265358979323846
+Content-Disposition: form-data; name="loginName"
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 8bit
+
+${LDAP_USERNAME_REDACTED}
+------------------314159265358979323846
+Content-Disposition: form-data; name="semester"
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 8bit
+
+202401
+------------------314159265358979323846
+Content-Disposition: form-data; name="courseKey"
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 8bit
+
+958fb4a21701a655
+------------------314159265358979323846
+Content-Disposition: form-data; name="hasFailedCVSOperation"
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 8bit
+
+false
+------------------314159265358979323846
+Content-Disposition: form-data; name="submitClientTool"
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 8bit
+
+EclipsePlugin
+------------------314159265358979323846
+Content-Disposition: form-data; name="submittedFiles"; filename="submit.zip"
+Content-Type: application/octet-stream; charset=ISO-8859-1
+Content-Transfer-Encoding: binary
+
+${ZIP_FILE_BINARY_DATA}

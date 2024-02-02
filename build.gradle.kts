@@ -13,7 +13,10 @@ repositories {
 
 dependencies {
     // https://mvnrepository.com/artifact/org.apache.httpcomponents/httpclient
-    implementation("org.apache.httpcomponents:httpclient:4.5.14")
+    compileOnly("org.apache.httpcomponents:httpclient:4.5.14")
+
+    // https://mvnrepository.com/artifact/net.lingala.zip4j/zip4j
+    implementation("net.lingala.zip4j:zip4j:2.11.5")
 }
 
 // Configure Gradle IntelliJ Plugin
