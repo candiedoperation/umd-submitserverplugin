@@ -5,7 +5,7 @@
 
     <!-- Public plugin name should be written in Title Case.
          Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-name -->
-    <name>UMDSubmitServerPlugin</name>
+    <name>UMD CS Project Integration</name>
 
     <!-- A displayed Vendor name or Organization ID displayed on the Plugins Page. -->
     <vendor email="support@umd-ssp.atheesh.org" url="https://umd-ssp.atheesh.org">Atheesh Thirumalairajan</vendor>
@@ -29,9 +29,11 @@
                 id="org.intellij.sdk.action.GroupedActions"
                 text="University of Maryland CS"
                 popup="true"
+                icon="/META-INF/pluginIcon.svg"
         >
             <add-to-group group-id="ToolsMenu" anchor="first"/>
             <action
+                    icon="AllIcons.Webreferences.WebSocket"
                     id="org.atheesh.umdsubmitserverplugin.SubmitProjectAction"
                     class="org.atheesh.umdsubmitserverplugin.SubmitProjectAction"
                     text="Submit This Project"
