@@ -29,7 +29,7 @@
                 id="org.intellij.sdk.action.GroupedActions"
                 text="University of Maryland CS"
                 popup="true"
-                icon="/META-INF/pluginIcon.svg"
+                icon="/META-INF/pluginIconAction16x16.svg"
         >
             <add-to-group group-id="ToolsMenu" anchor="first"/>
             <action

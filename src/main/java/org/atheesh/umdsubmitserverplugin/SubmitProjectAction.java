@@ -1,5 +1,6 @@
 package org.atheesh.umdsubmitserverplugin;
 
+import com.intellij.openapi.actionSystem.ActionUpdateThread;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.progress.ProgressIndicator;
@@ -27,6 +28,11 @@ public class SubmitProjectAction extends AnAction {
             /* Set Visibility Status */
             e.getPresentation().setEnabled(submitExists);
         }
+    }
+
+    @Override
+    public @NotNull ActionUpdateThread getActionUpdateThread() {
+        return ActionUpdateThread.EDT;
     }
 
     @Override
