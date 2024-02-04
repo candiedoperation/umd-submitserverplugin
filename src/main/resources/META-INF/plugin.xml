@@ -33,6 +33,13 @@
         >
             <add-to-group group-id="ToolsMenu" anchor="first"/>
             <action
+                    icon="AllIcons.Actions.NewFolder"
+                    id="org.atheesh.umdsubmitserverplugin.ImportProjectAction"
+                    class="org.atheesh.umdsubmitserverplugin.ImportProjectAction"
+                    text="Import a UMD CS Project"
+                    description="Imports a ZIP file with Eclipse Project Files">
+            </action>
+            <action
                     icon="AllIcons.Webreferences.WebSocket"
                     id="org.atheesh.umdsubmitserverplugin.SubmitProjectAction"
                     class="org.atheesh.umdsubmitserverplugin.SubmitProjectAction"
