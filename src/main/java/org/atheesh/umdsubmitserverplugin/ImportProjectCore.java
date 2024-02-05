@@ -8,6 +8,7 @@ import com.intellij.openapi.projectRoots.ProjectJdkTable;
 import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.roots.ProjectRootManager;
 import com.intellij.openapi.ui.Messages;
+import com.intellij.openapi.vfs.VirtualFile;
 import net.lingala.zip4j.ZipFile;
 import net.lingala.zip4j.exception.ZipException;
 import net.lingala.zip4j.model.FileHeader;
@@ -73,6 +74,9 @@ public class ImportProjectCore {
 
             /* Generate IntelliJ modules.xml */
             createModuleXML(projectRoot, projectName);
+
+            /* Save Project and Reload Modules */
+            project.save();
         } catch (Exception e) {
             throw new ImportProjectException(e.getMessage());
         }
