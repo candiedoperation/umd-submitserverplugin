@@ -4,7 +4,7 @@
 
 # Installation Instructions
 
-- Download the plugin file from this release
+- [Download the plugin file](https://github.com/candiedoperation/umd-submitserverplugin/releases/download/v1.0.1/umd-submitserverplugin-1.0.1.zip) from this release
 - Head to the Plugins section in IDEA IDE. (You could search for Plugins after using Ctrl+Shift+A or Help > Actions)
 - Near the Installed plugins tab, there exists a settings icon. Clicking on it lets you select **Install plugin from Disk**
 - Browse for the ZIP file you downloaded from this release and proceed with the installation
