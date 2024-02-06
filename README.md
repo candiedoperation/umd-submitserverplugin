@@ -1,6 +1,6 @@
 <img src="https://github.com/candiedoperation/umd-submitserverplugin/blob/4b5d951461c376c711019ebf6ad2bdf5396c1f58/src/main/resources/META-INF/pluginIcon.svg" width=180 height=180 />
 <h1>UMD CS Submit Server Plugin</h1>
-<p>The University of Maryland's submit server plugin, completely rewritten for the IntelliJ IDEA IDE. The Latest Version of the plugin can be found on this repository's releases section. Future version might be available on the IDEA Plugin Marketplace.</p>
+<p>The University of Maryland's submit server plugin, completely rewritten for the IntelliJ IDEA IDE. Additionally, the plugin includes a feature to import Eclipse projects provided as CS coursework directly into IDEA without the hassle of a manual import.</p>
 
 # Installation Instructions
 ## Using the IntelliJ Plugin Marketplace
