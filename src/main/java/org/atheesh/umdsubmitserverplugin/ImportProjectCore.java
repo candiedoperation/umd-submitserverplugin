@@ -78,6 +78,12 @@ public class ImportProjectCore {
 
     private static void importEclipseProject(String projectRoot, String projectName) throws ImportProjectException {
         try {
+            /* Generate IntelliJ .iml File */
+            createModuleIML(projectRoot, projectName);
+
+            /* Generate IntelliJ modules.xml */
+            createModuleXML(projectRoot, projectName);
+
             /* Access the Project Root Directory, Open Project */
             Project project = ProjectManager.getInstance().loadAndOpenProject(projectRoot);
 
@@ -86,15 +92,6 @@ public class ImportProjectCore {
                 Sdk[] sdkTable = ProjectJdkTable.getInstance().getAllJdks();
                 ProjectRootManager.getInstance(project).setProjectSdk(sdkTable[0]);
             });
-
-            /* Generate IntelliJ .iml File */
-            createModuleIML(projectRoot, projectName);
-
-            /* Generate IntelliJ modules.xml */
-            createModuleXML(projectRoot, projectName);
-
-            /* Save Project and Reload Modules */
-            project.save();
         } catch (Exception e) {
             throw new ImportProjectException(e.getMessage());
         }
