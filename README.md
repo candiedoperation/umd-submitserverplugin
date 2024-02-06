@@ -17,7 +17,7 @@
 - Browse for the ZIP file you downloaded from this release and proceed with the installation
 
 # Using the Plugin
-
+- [You can find video instructions in the YouTube Video](https://www.youtube.com/watch?v=_sftfxee4Z8)
 - The plugin is automatically enabled when a UMD CS project is detected
 - The Tools Menu has a section named University of Maryland CS
 - Once that option's clicked, you'll find a button to Submit the current project
