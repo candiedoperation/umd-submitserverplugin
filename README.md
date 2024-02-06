@@ -3,7 +3,14 @@
 <p>The University of Maryland's submit server plugin, completely rewritten for the IntelliJ IDEA IDE. The Latest Version of the plugin can be found on this repository's releases section. Future version might be available on the IDEA Plugin Marketplace.</p>
 
 # Installation Instructions
+## Using the IntelliJ Plugin Marketplace
+- [View detailed instructions with screenshots in the Wiki](https://github.com/candiedoperation/umd-submitserverplugin/wiki/Installing-the-Plugin-to-IntelliJ-IDEA)
+- Press Ctrl+Shift+A anywhere in the IDE and search plugins
+- Once the plugins window opens, click the marketplace tab at the top
+- Search for **UMD CS** and install the **UMD CS Project Integration** plugin
 
+## Manual Installation Pathway
+⚠️ This method is not recomended
 - [Download the plugin file](https://github.com/candiedoperation/umd-submitserverplugin/releases/download/v1.0.3/umd-submitserverplugin-1.0.3.zip) from this release
 - Head to the Plugins section in IDEA IDE. (You could search for Plugins after using Ctrl+Shift+A or Help > Actions)
 - Near the Installed plugins tab, there exists a settings icon. Clicking on it lets you select **Install plugin from Disk**
